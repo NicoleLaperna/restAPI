@@ -11,6 +11,9 @@ import com.enway.entity.Student;
 import com.enway.repository.AcademyRepository;
 import com.enway.repository.StudentRepository;
 import com.enway.service.StudentAcademyService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class StudentAcademyServiceImpl implements StudentAcademyService {
@@ -118,5 +121,9 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 
 		return studentRepository.findByAcademy(academy);
 	}
-
+	
+	public String returnStudentJson(Student student) throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writeValueAsString(student);
+	}
 }

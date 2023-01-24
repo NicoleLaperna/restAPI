@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
 import com.enway.service.StudentAcademyService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/academies-service")
@@ -76,6 +77,12 @@ public class StudentAcademyController {
 	@DeleteMapping("/students/{passportNumber}")
 	public Map<String,Boolean> removeStudent(@PathVariable String passportNumber) {			
 		return studentAcademyService.removeStudent(passportNumber);
+	}
+	
+	//XML-API
+	@PostMapping("/student/{passportNumber}")
+	public String getStudentObject(@RequestBody Student student) throws JsonProcessingException {
+		return studentAcademyService.returnStudentJson(student);
 	}
 
 }
