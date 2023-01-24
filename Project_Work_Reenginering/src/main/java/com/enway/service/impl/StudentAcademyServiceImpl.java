@@ -1,4 +1,4 @@
-package com.enway.service;
+package com.enway.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +10,7 @@ import com.enway.entity.Academy;
 import com.enway.entity.Student;
 import com.enway.repository.AcademyRepository;
 import com.enway.repository.StudentRepository;
+import com.enway.service.StudentAcademyService;
 
 @Service
 public class StudentAcademyServiceImpl implements StudentAcademyService {
