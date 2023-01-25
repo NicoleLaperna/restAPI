@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
 import com.enway.service.StudentAcademyService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/academies-service")

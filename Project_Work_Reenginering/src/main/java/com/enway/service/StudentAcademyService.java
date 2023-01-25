@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface StudentAcademyService {
 
@@ -25,5 +24,4 @@ public interface StudentAcademyService {
 	
 	public List<Student> findStudentsByAcademy(String codeAcademy);
 	
-	public String returnStudentJson(Student student);
 }

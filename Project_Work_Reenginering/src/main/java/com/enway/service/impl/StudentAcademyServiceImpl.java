@@ -1,14 +1,9 @@
 package com.enway.service.impl;
 
-import java.io.File;
-import java.io.StringReader;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +12,6 @@ import com.enway.entity.Student;
 import com.enway.repository.AcademyRepository;
 import com.enway.repository.StudentRepository;
 import com.enway.service.StudentAcademyService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class StudentAcademyServiceImpl implements StudentAcademyService {
