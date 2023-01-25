@@ -81,8 +81,12 @@ public class StudentAcademyController {
 	
 	//XML-API
 	@PostMapping("/student/{passportNumber}")
-	public String getStudentObject(@RequestBody Student student) throws JsonProcessingException {
-		return studentAcademyService.returnStudentJson(student);
+	public String getStudentObject(@RequestBody String student) {
+		return student;
 	}
-
+	
+	@PostMapping("/student/xml/{passportNumber}")
+	public String getStudentStringFromXml(@RequestBody String student) {
+		return student;
+	}
 }

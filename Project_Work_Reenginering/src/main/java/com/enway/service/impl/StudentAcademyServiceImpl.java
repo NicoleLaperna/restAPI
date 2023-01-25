@@ -1,8 +1,14 @@
 package com.enway.service.impl;
 
+import java.io.File;
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +31,12 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 	private StudentRepository studentRepository;
 
 	@Override
-	public Academy  addOrUpdateAcademy(Academy academy) {
+	public Academy addOrUpdateAcademy(Academy academy) {
 		Academy academySaved = academyRepository.save(academy);
-		
+
 		List<Student> students = academy.getStudents();
-		
-		if(students != null) {
+
+		if (students != null) {
 			for (Student student : students) {
 				studentRepository.save(student);
 			}
@@ -40,7 +46,7 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 
 	@Override
 	public Student addOrUpdateStudent(Student student) {
-		
+
 		return studentRepository.save(student);
 	}
 
@@ -52,52 +58,56 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 	}
 
 	@Override
-	public Map<String,Boolean> removeAcademyAndStudents(String code) {
-		
-		Map<String,Boolean> operation = new HashMap<>();
+	public Map<String, Boolean> removeAcademyAndStudents(String code) {
+
+		Map<String, Boolean> operation = new HashMap<>();
 
 		if (academyRepository.existsById(code)) {
-			
+
 			academyRepository.deleteById(code);
 
 			if (!academyRepository.existsById(code)) {
 
 				operation.put("deletion", true);
 			} else {
-				
-				operation.put("deletion", false);;
+
+				operation.put("deletion", false);
+				;
 			}
-			
+
 		} else {
-			
-			operation.put("deletion", false);;
+
+			operation.put("deletion", false);
+			;
 		}
-		
+
 		return operation;
 	}
 
 	@Override
-	public Map<String,Boolean> removeStudent(String passportNumber) {
-		
-		Map<String,Boolean> operation = new HashMap<>();
+	public Map<String, Boolean> removeStudent(String passportNumber) {
+
+		Map<String, Boolean> operation = new HashMap<>();
 
 		if (studentRepository.existsById(passportNumber)) {
-			
+
 			studentRepository.deleteById(passportNumber);
 
 			if (!studentRepository.existsById(passportNumber)) {
 
 				operation.put("deletion", true);
 			} else {
-				
-				operation.put("deletion", false);;
+
+				operation.put("deletion", false);
+				;
 			}
-			
+
 		} else {
-			
-			operation.put("deletion", false);;
+
+			operation.put("deletion", false);
+			;
 		}
-		
+
 		return operation;
 	}
 
@@ -114,16 +124,13 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 		return academyRepository.findById(code).get();
 
 	}
-	
+
 	public List<Student> findStudentsByAcademy(String codeAcademy) {
 
 		Academy academy = findAcademyById(codeAcademy);
 
 		return studentRepository.findByAcademy(academy);
 	}
-	
-	public String returnStudentJson(Student student) throws JsonProcessingException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.writeValueAsString(student);
-	}
+
+
 }

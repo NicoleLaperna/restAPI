@@ -25,5 +25,5 @@ public interface StudentAcademyService {
 	
 	public List<Student> findStudentsByAcademy(String codeAcademy);
 	
-	public String returnStudentJson(Student student) throws JsonProcessingException ;
+	public String returnStudentJson(Student student);
 }
