@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,5 +91,18 @@ public class StudentAcademyController {
 	@PostMapping("/student/json/{passportNumber}")
 	public String getStudentStringFromJson(@RequestBody Student student) throws JAXBException {
 		return studentAcademyService.parseStudentJson(student);
+	}
+	
+	@GetMapping("/student-found/{passportNumber}")
+	public ResponseEntity<Student> findStudentById(@PathVariable(value = "passportNumber", required = false) String passportNumber) {
+		if(passportNumber==null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		Student student = studentAcademyService.findStudentById(passportNumber);
+		if(student==null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}else {
+			return new ResponseEntity<>(student, HttpStatus.OK);
+		}
 	}
 }

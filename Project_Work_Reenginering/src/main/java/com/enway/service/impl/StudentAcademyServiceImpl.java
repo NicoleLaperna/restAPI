@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -114,8 +115,13 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 
 	@Override
 	public Student findStudentById(String passportNumber) {
-
-		return studentRepository.findById(passportNumber).get();
+		Student studentFound=null;
+		try {
+			studentFound = studentRepository.findById(passportNumber).get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return studentFound;
 
 	}
 
@@ -143,7 +149,7 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 		return result;
 		
 	}
-	
+	//Json
 	public String parseStudentJson(Student student) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -154,5 +160,6 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 		}
 		return null;
 	}
+	
 
 }
