@@ -3,6 +3,8 @@ package com.enway.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,14 +80,14 @@ public class StudentAcademyController {
 		return studentAcademyService.removeStudent(passportNumber);
 	}
 	
-	//XML-API
-	@PostMapping("/student/{passportNumber}")
-	public String getStudentObject(@RequestBody String student) {
-		return student;
-	}
 	
 	@PostMapping("/student/xml/{passportNumber}")
-	public String getStudentStringFromXml(@RequestBody String student) {
-		return student;
+	public String getStudentStringFromXml(@RequestBody Student student) throws JAXBException {
+		return studentAcademyService.parseStudentXmlFromObject(student);
+	}
+	
+	@PostMapping("/student/json/{passportNumber}")
+	public String getStudentStringFromJson(@RequestBody Student student) throws JAXBException {
+		return studentAcademyService.parseStudentJson(student);
 	}
 }

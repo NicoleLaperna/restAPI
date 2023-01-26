@@ -1,9 +1,16 @@
 package com.enway.service.impl;
 
 
+import java.io.File;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +19,8 @@ import com.enway.entity.Student;
 import com.enway.repository.AcademyRepository;
 import com.enway.repository.StudentRepository;
 import com.enway.service.StudentAcademyService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class StudentAcademyServiceImpl implements StudentAcademyService {
@@ -124,5 +133,26 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 		return studentRepository.findByAcademy(academy);
 	}
 
+	public String parseStudentXmlFromObject(Student student) throws JAXBException{
+		JAXBContext context= JAXBContext.newInstance(Student.class);
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		StringWriter sw = new StringWriter();
+		mar.marshal(student, sw);
+		String result = sw.toString();
+		return result;
+		
+	}
+	
+	public String parseStudentJson(Student student) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String studentParsed = mapper.writeValueAsString(student);
+			return studentParsed;
+		} catch (Exception e) {
+			System.out.println("Something went wrong");
+		}
+		return null;
+	}
 
 }
