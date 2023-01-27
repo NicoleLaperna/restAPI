@@ -15,6 +15,9 @@ import javax.xml.bind.PropertyException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
 import com.enway.repository.AcademyRepository;
@@ -159,6 +162,14 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 			System.out.println("Something went wrong");
 		}
 		return null;
+	}
+	
+	//Rest API
+	public String invokeGetApi() {
+		RestTemplate restTemplate= new RestTemplate();
+		String url = "https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0";
+		String result = restTemplate.getForObject(url, String.class);
+		return result;
 	}
 	
 

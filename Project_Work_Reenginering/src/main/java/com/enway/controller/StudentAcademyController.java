@@ -106,4 +106,8 @@ public class StudentAcademyController {
 			return new ResponseEntity<>(student, HttpStatus.OK);
 		}
 	}
+	@GetMapping("/api-get")
+	public String getApi() {
+		return studentAcademyService.invokeGetApi();
+	}
 }

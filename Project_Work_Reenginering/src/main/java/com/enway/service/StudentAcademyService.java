@@ -30,4 +30,6 @@ public interface StudentAcademyService {
 	
 	public String parseStudentJson(Student student);
 	
+	public String invokeGetApi();
+	
 }
