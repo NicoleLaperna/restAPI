@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
@@ -93,8 +94,8 @@ public class StudentAcademyController {
 		return studentAcademyService.parseStudentJson(student);
 	}
 	
-	@GetMapping("/student-found/{passportNumber}")
-	public ResponseEntity<Student> findStudentById(@PathVariable(value = "passportNumber", required = false) String passportNumber) {
+	@GetMapping("/student-found")
+	public ResponseEntity<Student> findStudentById(@RequestParam(name="id") String passportNumber) {
 		if(passportNumber==null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
