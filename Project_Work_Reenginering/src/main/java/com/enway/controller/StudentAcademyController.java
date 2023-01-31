@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.enway.entity.Academy;
+import com.enway.entity.Joke;
 import com.enway.entity.Student;
 import com.enway.entity.Translate;
 import com.enway.service.StudentAcademyService;
@@ -113,7 +114,7 @@ public class StudentAcademyController {
 	}
 	
 	@PostMapping("/api-post")
-	public void postApi(@RequestBody Translate translate) {
-		studentAcademyService.invokePostApi(translate);
+	public void postApi(@RequestBody Joke joke) {
+		studentAcademyService.invokePostApi(joke);
 	}
 }

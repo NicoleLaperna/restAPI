@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import com.enway.entity.Academy;
+import com.enway.entity.Joke;
 import com.enway.entity.Student;
 import com.enway.entity.Translate;
 
@@ -33,6 +34,6 @@ public interface StudentAcademyService {
 	
 	public String invokeGetApi();
 	
-	public void invokePostApi(Translate translate);
+	public String invokePostApi(Joke joke);
 	
 }
