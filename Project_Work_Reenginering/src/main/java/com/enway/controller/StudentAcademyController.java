@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
+import com.enway.entity.Translate;
 import com.enway.service.StudentAcademyService;
 
 @RestController
@@ -109,5 +110,10 @@ public class StudentAcademyController {
 	@GetMapping("/api-get")
 	public String getApi() {
 		return studentAcademyService.invokeGetApi();
+	}
+	
+	@PostMapping("/api-post")
+	public void postApi(@RequestBody Translate translate) {
+		studentAcademyService.invokePostApi(translate);
 	}
 }

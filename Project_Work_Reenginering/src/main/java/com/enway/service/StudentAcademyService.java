@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
+import com.enway.entity.Translate;
 
 public interface StudentAcademyService {
 
@@ -31,5 +32,7 @@ public interface StudentAcademyService {
 	public String parseStudentJson(Student student);
 	
 	public String invokeGetApi();
+	
+	public void invokePostApi(Translate translate);
 	
 }

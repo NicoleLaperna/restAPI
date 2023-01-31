@@ -2,7 +2,10 @@ package com.enway.service.impl;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URI;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +17,19 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.enway.entity.Academy;
 import com.enway.entity.Student;
+import com.enway.entity.Translate;
 import com.enway.repository.AcademyRepository;
 import com.enway.repository.StudentRepository;
 import com.enway.service.StudentAcademyService;
@@ -172,5 +182,30 @@ public class StudentAcademyServiceImpl implements StudentAcademyService {
 		return result;
 	}
 	
+	public void invokePostApi(Translate translate) {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "https://google-translate1.p.rapidapi.com/language/translate/v2";
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("Accept-Encoding", "application/gzip");
+		headers.set("X-RapidAPI-Key", "adaa531134msh51085e7b56d35d2p1c1bd5jsn6ba9ac480eac");
+		headers.set("X-RapidAPI-Host", "google-translate1.p.rapidapi.com");
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("q", translate.q);
+		map.put("target", translate.target);
+		
+		HttpEntity<Map<String, String>> entity = new HttpEntity<>(map, headers);
+		ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+		if (response.getStatusCode() == HttpStatus.CREATED) {
+		    System.out.println("Request Successful");
+		    System.out.println(response.getBody());
+		} else {
+		    System.out.println("Request Failed");
+		    System.out.println(response.getStatusCode());
+		}
 
+		
+	}
 }
